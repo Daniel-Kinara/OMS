@@ -1,0 +1,251 @@
+/* ============ GLOBAL ============ */
+QWidget {
+    font-family: "Segoe UI";
+    font-size: 13px;
+    color: #2b2b2b;
+}
+
+QMainWindow, #scrollAreaWidgetContents, QScrollArea {
+    background-color: #f5f1e8;
+    border: none;
+}
+
+/* ============ TOP BAR ============ */
+#topBarFrame {
+    background-color: #14171f;
+    border-bottom: 1px solid #232733;
+}
+
+#btnMenuToggle {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    font-size: 16px;
+}
+
+#appTitleLabel {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 24px;
+}
+
+#searchBar {
+    background-color: #1f232e;
+    color: #c7cbd3;
+    border: 1px solid #2c3140;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+#btnNotifications, #btnMessages {
+    background-color: #1f232e;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-left: 6px;
+}
+
+#btnNotifications:hover, #btnMessages:hover {
+    background-color: #2c3140;
+}
+
+#profileFrame {
+    margin-left: 14px;
+}
+
+#profileNameLabel {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#profileRoleLabel {
+    color: #e8a63c;
+    font-size: 10px;
+}
+
+/* ============ SIDEBAR ============ */
+#sidebarFrame {
+    background-color: #14171f;
+    border-right: 1px solid #232733;
+}
+
+#logoLabel {
+    background-color: #e8a63c;
+    color: #14171f;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 8px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 40px;
+    min-height: 40px;
+}
+
+#companyLabel {
+    color: #9aa0ab;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 8px 0px 4px 0px;
+}
+
+#sectionOverview, #sectionDailyOps, #sectionVisitors, #sectionMaintenance {
+    color: #5c6270;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 14px 4px 4px 4px;
+}
+
+#sidebarFrame QPushButton {
+    background-color: transparent;
+    color: #c7cbd3;
+    text-align: left;
+    padding: 9px 10px;
+    border: none;
+    border-radius: 6px;
+}
+
+#sidebarFrame QPushButton:hover {
+    background-color: #232733;
+    color: #ffffff;
+}
+
+#sidebarFrame QPushButton:checked {
+    background-color: #e8a63c;
+    color: #14171f;
+    font-weight: bold;
+}
+
+/* ============ WELCOME HEADER ============ */
+#titleLabel {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1c1c1c;
+}
+
+#metaLabel {
+    color: #6b6b6b;
+    font-size: 13px;
+    padding-top: 2px;
+}
+
+#dateBadge {
+    background-color: #ffffff;
+    border: 1px solid #e5e0d3;
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: #4a4a4a;
+    font-weight: bold;
+}
+
+#logButtonsFrame QPushButton {
+    background-color: #ffffff;
+    border: 1px solid #d8d2c4;
+    border-radius: 6px;
+    padding: 9px 16px;
+}
+
+#btnLogInspection {
+    background-color: #14171f;
+    color: #ffffff;
+    border: none;
+}
+
+/* ============ STAT CARDS ============ */
+#cardVisitors, #cardMaintenance, #cardInspections, #cardSafety, #cardCompound {
+    background-color: #ffffff;
+    border: 1px solid #e5e0d3;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+#cardVisitorsIcon, #cardMaintenanceIcon, #cardInspectionsIcon,
+#cardSafetyIcon, #cardCompoundIcon {
+    background-color: #fbf3e2;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 6px;
+    max-width: 30px;
+    max-height: 20px;
+}
+
+#cardVisitorsValue, #cardMaintenanceValue, #cardInspectionsValue,
+#cardSafetyValue, #cardCompoundValue {
+    font-size: 26px;
+    font-weight: bold;
+    color: #1c1c1c;
+    padding-top: 6px;
+}
+
+#cardVisitorsCaption, #cardMaintenanceCaption, #cardInspectionsCaption,
+#cardSafetyCaption, #cardCompoundCaption {
+    color: #8a8578;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* ============ CONTENT PANELS ============ */
+#checklistPanel, #maintenancePanel, #activityPanel, #visitorPanel, #quickActionsFrame {
+    background-color: #ffffff;
+    border: 1px solid #e5e0d3;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+#checklistTitle, #maintenanceTitle, #activityTitle, #visitorTitle, #quickActionsTitle {
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 6px;
+}
+
+QListWidget, QTableWidget {
+    border: none;
+    outline: none;
+}
+
+QTableWidget::item {
+    padding: 6px;
+}
+
+QHeaderView::section {
+    background-color: #f5f1e8;
+    border: none;
+    padding: 6px;
+    font-weight: bold;
+    color: #6b6b6b;
+}
+
+/* ============ QUICK ACTIONS ============ */
+#quickActionsLayout QPushButton {
+    background-color: #fbf9f4;
+    border: 1px solid #e5e0d3;
+    border-radius: 10px;
+    padding: 16px;
+    font-weight: bold;
+}
+
+#quickActionsLayout QPushButton:hover {
+    background-color: #fbf3e2;
+    border: 1px solid #e8a63c;
+}
+
+/* ============ SCROLLBAR ============ */
+QScrollBar:vertical {
+    background: #f5f1e8;
+    width: 10px;
+}
+
+QScrollBar::handle:vertical {
+    background: #d8d2c4;
+    border-radius: 5px;
+    min-height: 30px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
