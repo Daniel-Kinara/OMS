@@ -20,31 +20,45 @@ QMainWindow, #scrollAreaWidgetContents, QScrollArea {
     background-color: transparent;
     color: #ffffff;
     border: none;
-    font-size: 16px;
+    font-size: 18px;
+    padding: 4px 8px;
+}
+
+#btnMenuToggle:hover {
+    background-color: #232733;
+    border-radius: 6px;
 }
 
 #appTitleLabel {
     color: #ffffff;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     padding-left: 10px;
     padding-right: 24px;
+    letter-spacing: 1px;
 }
 
 #searchBar {
     background-color: #1f232e;
     color: #c7cbd3;
     border: 1px solid #2c3140;
-    border-radius: 8px;
-    padding: 8px 12px;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+#searchBar:focus {
+    border: 1px solid #e8a63c;
 }
 
 #btnNotifications, #btnMessages {
     background-color: #1f232e;
     color: #ffffff;
     border: none;
-    border-radius: 8px;
+    border-radius: 18px;
     font-size: 14px;
+    min-width: 36px;
+    min-height: 36px;
     margin-left: 6px;
 }
 
@@ -59,45 +73,46 @@ QMainWindow, #scrollAreaWidgetContents, QScrollArea {
 #profileNameLabel {
     color: #ffffff;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 #profileRoleLabel {
     color: #e8a63c;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 /* ============ SIDEBAR ============ */
 #sidebarFrame {
     background-color: #14171f;
-    border-right: 1px solid #232733;
+    border-right: 1px solid #1e2330;
 }
 
 #logoLabel {
     background-color: #e8a63c;
     color: #14171f;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     border-radius: 8px;
-    padding: 8px;
-    max-width: 40px;
-    min-width: 40px;
-    max-height: 40px;
-    min-height: 40px;
+    padding: 6px;
+    max-width: 42px;
+    min-width: 42px;
+    max-height: 42px;
+    min-height: 42px;
 }
 
 #companyLabel {
     color: #9aa0ab;
     font-size: 10px;
     font-weight: bold;
-    padding: 8px 0px 4px 0px;
+    padding: 6px 0px 2px 0px;
+    line-height: 1.5;
 }
 
 #sectionOverview, #sectionDailyOps, #sectionVisitors, #sectionMaintenance {
-    color: #5c6270;
+    color: #4a5060;
     font-size: 10px;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     padding: 14px 4px 4px 4px;
 }
 
@@ -105,13 +120,14 @@ QMainWindow, #scrollAreaWidgetContents, QScrollArea {
     background-color: transparent;
     color: #c7cbd3;
     text-align: left;
-    padding: 9px 10px;
+    padding: 10px 12px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
+    font-size: 13px;
 }
 
 #sidebarFrame QPushButton:hover {
-    background-color: #232733;
+    background-color: #1e2330;
     color: #ffffff;
 }
 
@@ -123,45 +139,66 @@ QMainWindow, #scrollAreaWidgetContents, QScrollArea {
 
 /* ============ WELCOME HEADER ============ */
 #titleLabel {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     color: #1c1c1c;
 }
 
 #metaLabel {
-    color: #6b6b6b;
+    color: #7a7670;
     font-size: 13px;
-    padding-top: 2px;
+    padding-top: 3px;
 }
 
 #dateBadge {
     background-color: #ffffff;
     border: 1px solid #e5e0d3;
     border-radius: 8px;
-    padding: 8px 14px;
+    padding: 10px 16px;
     color: #4a4a4a;
     font-weight: bold;
+    font-size: 13px;
 }
 
+/* Log buttons */
 #logButtonsFrame QPushButton {
     background-color: #ffffff;
     border: 1px solid #d8d2c4;
-    border-radius: 6px;
-    padding: 9px 16px;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+}
+
+#logButtonsFrame QPushButton:hover {
+    background-color: #fdf8f0;
+    border: 1px solid #e8a63c;
 }
 
 #btnLogInspection {
     background-color: #14171f;
-    color: #ffffff;
+    color: #14171f;
     border: none;
 }
 
+#btnLogInspection:hover {
+    background-color: #1e2330;
+}
+
 /* ============ STAT CARDS ============ */
+#statsFrame {
+    background-color: transparent;
+}
+
 #cardVisitors, #cardMaintenance, #cardInspections, #cardSafety, #cardCompound {
     background-color: #ffffff;
-    border: 1px solid #e5e0d3;
-    border-radius: 12px;
-    padding: 16px;
+    border: 1px solid #ece8df;
+    border-radius: 14px;
+    padding: 18px 16px;
+}
+
+#cardVisitors:hover, #cardMaintenance:hover, #cardInspections:hover,
+#cardSafety:hover, #cardCompound:hover {
+    border: 1px solid #e8a63c;
 }
 
 #cardVisitorsIcon, #cardMaintenanceIcon, #cardInspectionsIcon,
@@ -169,80 +206,142 @@ QMainWindow, #scrollAreaWidgetContents, QScrollArea {
     background-color: #fbf3e2;
     border-radius: 8px;
     font-size: 16px;
-    padding: 6px;
-    max-width: 30px;
-    max-height: 20px;
+    padding: 4px 6px;
+    max-width: 28px;
 }
 
 #cardVisitorsValue, #cardMaintenanceValue, #cardInspectionsValue,
 #cardSafetyValue, #cardCompoundValue {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
     color: #1c1c1c;
-    padding-top: 6px;
+    padding-top: 4px;
 }
 
 #cardVisitorsCaption, #cardMaintenanceCaption, #cardInspectionsCaption,
 #cardSafetyCaption, #cardCompoundCaption {
-    color: #8a8578;
+    color: #9a9590;
     font-size: 11px;
     font-weight: bold;
+    padding-top: 2px;
 }
 
 /* ============ CONTENT PANELS ============ */
-#checklistPanel, #maintenancePanel, #activityPanel, #visitorPanel, #quickActionsFrame {
+#checklistPanel, #maintenancePanel, #activityPanel,
+#visitorPanel, #quickActionsFrame {
     background-color: #ffffff;
-    border: 1px solid #e5e0d3;
-    border-radius: 12px;
-    padding: 16px;
+    border: 1px solid #ece8df;
+    border-radius: 14px;
+    padding: 18px;
 }
 
-#checklistTitle, #maintenanceTitle, #activityTitle, #visitorTitle, #quickActionsTitle {
+#checklistTitle, #maintenanceTitle, #activityTitle,
+#visitorTitle, #quickActionsTitle {
     font-weight: bold;
     font-size: 14px;
-    padding-bottom: 6px;
+    color: #1c1c1c;
 }
 
-QListWidget, QTableWidget {
+/* "View all ›" link buttons in panel headers */
+#btnViewChecklist, #btnViewMaintenance,
+#btnViewActivity, #btnViewVisitorLog {
+    background-color: transparent;
+    color: #b8791f;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px 4px;
+}
+
+#btnViewChecklist:hover, #btnViewMaintenance:hover,
+#btnViewActivity:hover, #btnViewVisitorLog:hover {
+    color: #e8a63c;
+}
+
+/* ============ LISTS ============ */
+QListWidget {
     border: none;
     outline: none;
+    background-color: #ffffff;
+}
+
+QListWidget::item {
+    padding: 8px 4px;
+    border-bottom: 1px solid #f3efe6;
+    color: #3a3a3a;
+}
+
+QListWidget::item:selected {
+    background-color: #fbf3e2;
+    color: #1c1c1c;
+}
+
+/* ============ TABLES ============ */
+QTableWidget {
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    gridline-color: transparent;
+    alternate-background-color: #faf8f4;
 }
 
 QTableWidget::item {
-    padding: 6px;
+    padding: 8px 8px;
+    border-bottom: 1px solid #f3efe6;
+    color: #3a3a3a;
+}
+
+QTableWidget::item:selected {
+    background-color: #fbf3e2;
+    color: #1c1c1c;
+}
+
+QHeaderView {
+    background-color: #ffffff;
 }
 
 QHeaderView::section {
-    background-color: #f5f1e8;
+    background-color: #faf8f4;
     border: none;
-    padding: 6px;
+    border-bottom: 2px solid #ece8df;
+    padding: 10px 8px;
     font-weight: bold;
-    color: #6b6b6b;
+    font-size: 12px;
+    color: #7a7670;
+}
+
+QTableCornerButton::section {
+    background-color: #faf8f4;
+    border: none;
 }
 
 /* ============ QUICK ACTIONS ============ */
 #quickActionsLayout QPushButton {
-    background-color: #fbf9f4;
-    border: 1px solid #e5e0d3;
+    background-color: #faf8f4;
+    border: 1px solid #ece8df;
     border-radius: 10px;
-    padding: 16px;
+    padding: 18px;
+    font-size: 13px;
     font-weight: bold;
+    color: #3a3a3a;
 }
 
 #quickActionsLayout QPushButton:hover {
     background-color: #fbf3e2;
     border: 1px solid #e8a63c;
+    color: #1c1c1c;
 }
 
 /* ============ SCROLLBAR ============ */
 QScrollBar:vertical {
     background: #f5f1e8;
-    width: 10px;
+    width: 8px;
+    margin: 0px;
 }
 
 QScrollBar::handle:vertical {
     background: #d8d2c4;
-    border-radius: 5px;
+    border-radius: 4px;
     min-height: 30px;
 }
 

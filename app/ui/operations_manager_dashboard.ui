@@ -16,7 +16,7 @@
     <property name="rightMargin"><number>0</number></property>
     <property name="bottomMargin"><number>0</number></property>
 
-    <!-- ===================== TOP BAR ===================== -->
+    <!-- TOP BAR -->
     <item>
      <widget class="QFrame" name="topBarFrame">
       <property name="minimumSize"><size><width>0</width><height>64</height></size></property>
@@ -24,10 +24,11 @@
       <layout class="QHBoxLayout" name="topBarLayout">
        <property name="leftMargin"><number>18</number></property>
        <property name="rightMargin"><number>18</number></property>
+       <property name="spacing"><number>10</number></property>
 
        <item><widget class="QPushButton" name="btnMenuToggle">
         <property name="text"><string>☰</string></property>
-        <property name="maximumSize"><size><width>36</width><height>36</height></size></property>
+        <property name="maximumSize"><size><width>38</width><height>38</height></size></property>
        </widget></item>
 
        <item><widget class="QLabel" name="appTitleLabel">
@@ -36,7 +37,8 @@
 
        <item><widget class="QLineEdit" name="searchBar">
         <property name="placeholderText"><string>Search anything…</string></property>
-        <property name="minimumSize"><size><width>380</width><height>0</height></size></property>
+        <property name="minimumSize"><size><width>360</width><height>36</height></size></property>
+        <property name="maximumSize"><size><width>480</width><height>36</height></size></property>
        </widget></item>
 
        <item><spacer name="topBarSpacer">
@@ -46,16 +48,20 @@
 
        <item><widget class="QPushButton" name="btnNotifications">
         <property name="text"><string>🔔</string></property>
+        <property name="minimumSize"><size><width>36</width><height>36</height></size></property>
         <property name="maximumSize"><size><width>36</width><height>36</height></size></property>
        </widget></item>
+
        <item><widget class="QPushButton" name="btnMessages">
         <property name="text"><string>✉</string></property>
+        <property name="minimumSize"><size><width>36</width><height>36</height></size></property>
         <property name="maximumSize"><size><width>36</width><height>36</height></size></property>
        </widget></item>
 
        <item><widget class="QFrame" name="profileFrame">
         <layout class="QVBoxLayout" name="profileLayout">
-         <property name="spacing"><number>0</number></property>
+         <property name="spacing"><number>1</number></property>
+         <property name="leftMargin"><number>10</number></property>
          <item><widget class="QLabel" name="profileNameLabel">
           <property name="text"><string>Operations Manager</string></property>
          </widget></item>
@@ -69,7 +75,7 @@
      </widget>
     </item>
 
-    <!-- ===================== BODY (sidebar + content) ===================== -->
+    <!-- BODY: sidebar + scrollable content -->
     <item>
      <widget class="QFrame" name="bodyFrame">
       <layout class="QHBoxLayout" name="bodyLayout">
@@ -95,52 +101,83 @@
            <property name="text"><string>OM</string></property>
            <property name="alignment"><set>Qt::AlignmentFlag::AlignCenter</set></property>
           </widget></item>
+
           <item><widget class="QLabel" name="companyLabel">
            <property name="text"><string>Mfano Bora Africa
 Operations Manager · OMS</string></property>
            <property name="alignment"><set>Qt::AlignmentFlag::AlignCenter</set></property>
           </widget></item>
 
-          <item><widget class="Line" name="sidebarSep0"><property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property></widget></item>
+          <item><widget class="Line" name="sidebarSep0">
+           <property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property>
+          </widget></item>
 
-          <item><widget class="QLabel" name="sectionOverview"><property name="text"><string>OVERVIEW</string></property></widget></item>
-          <item><widget class="QPushButton" name="btnDashboard"><property name="text"><string>🏠  Dashboard</string></property></widget></item>
+          <item><widget class="QLabel" name="sectionOverview">
+           <property name="text"><string>OVERVIEW</string></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnDashboard">
+           <property name="text"><string>🏠  Dashboard</string></property>
+          </widget></item>
 
-          <item><widget class="QLabel" name="sectionDailyOps"><property name="text"><string>DAILY OPERATIONS</string></property></widget></item>
-          <item><widget class="QPushButton" name="btnOfficeCleanliness"><property name="text"><string>🧹  Office Cleanliness</string></property></widget></item>
-          <item><widget class="QPushButton" name="btnCompoundManagement"><property name="text"><string>🌳  Compound Management</string></property></widget></item>
-          <item><widget class="QPushButton" name="btnFacilityInspections"><property name="text"><string>🔍  Facility Inspections</string></property></widget></item>
-          <item><widget class="QPushButton" name="btnOfficeSafety"><property name="text"><string>🛡  Office Safety</string></property></widget></item>
+          <item><widget class="QLabel" name="sectionDailyOps">
+           <property name="text"><string>DAILY OPERATIONS</string></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnOfficeCleanliness">
+           <property name="text"><string>🧹  Office Cleanliness</string></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnCompoundManagement">
+           <property name="text"><string>🌳  Compound Management</string></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnFacilityInspections">
+           <property name="text"><string>🔍  Facility Inspections</string></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnOfficeSafety">
+           <property name="text"><string>🛡  Office Safety</string></property>
+          </widget></item>
 
-          <item><widget class="QLabel" name="sectionVisitors"><property name="text"><string>VISITORS</string></property></widget></item>
-          <item><widget class="QPushButton" name="btnVisitorRegistration"><property name="text"><string>🧾  Visitor Registration</string></property></widget></item>
+          <item><widget class="QLabel" name="sectionVisitors">
+           <property name="text"><string>VISITORS</string></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnVisitorRegistration">
+           <property name="text"><string>🧾  Visitor Registration</string></property>
+          </widget></item>
 
-          <item><widget class="QLabel" name="sectionMaintenance"><property name="text"><string>MAINTENANCE</string></property></widget></item>
-          <item><widget class="QPushButton" name="btnMaintenanceRequests"><property name="text"><string>🔧  Maintenance Requests</string></property></widget></item>
+          <item><widget class="QLabel" name="sectionMaintenance">
+           <property name="text"><string>MAINTENANCE</string></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnMaintenanceRequests">
+           <property name="text"><string>🔧  Maintenance Requests</string></property>
+          </widget></item>
 
           <item><spacer name="sidebarSpacer">
            <property name="orientation"><enum>Qt::Orientation::Vertical</enum></property>
            <property name="sizeHint"><size><width>20</width><height>40</height></size></property>
           </spacer></item>
 
-          <item><widget class="Line" name="sidebarSep1"><property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property></widget></item>
-          <item><widget class="QPushButton" name="btnSettings"><property name="text"><string>⚙  Settings</string></property></widget></item>
-          <item><widget class="QPushButton" name="btnLogout"><property name="text"><string>🚪  Logout</string></property></widget></item>
+          <item><widget class="Line" name="sidebarSep1">
+           <property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnSettings">
+           <property name="text"><string>⚙  Settings</string></property>
+          </widget></item>
+          <item><widget class="QPushButton" name="btnLogout">
+           <property name="text"><string>🚪  Logout</string></property>
+          </widget></item>
+
          </layout>
         </widget>
        </item>
 
-       <!-- SCROLLABLE CONTENT -->
+       <!-- SCROLLABLE CONTENT AREA -->
        <item>
         <widget class="QScrollArea" name="contentScrollArea">
          <property name="widgetResizable"><bool>true</bool></property>
          <property name="frameShape"><enum>QFrame::Shape::NoFrame</enum></property>
          <widget class="QWidget" name="scrollAreaWidgetContents">
-          <property name="geometry"><rect><x>0</x><y>0</y><width>1400</width><height>1400</height></rect></property>
           <layout class="QVBoxLayout" name="contentLayout">
            <property name="spacing"><number>18</number></property>
            <property name="leftMargin"><number>28</number></property>
-           <property name="topMargin"><number>22</number></property>
+           <property name="topMargin"><number>24</number></property>
            <property name="rightMargin"><number>28</number></property>
            <property name="bottomMargin"><number>28</number></property>
 
@@ -148,9 +185,10 @@ Operations Manager · OMS</string></property>
            <item>
             <widget class="QFrame" name="headerFrame">
              <layout class="QHBoxLayout" name="headerTopLayout">
+              <property name="spacing"><number>12</number></property>
               <item>
                <layout class="QVBoxLayout" name="welcomeTextLayout">
-                <property name="spacing"><number>2</number></property>
+                <property name="spacing"><number>3</number></property>
                 <item><widget class="QLabel" name="titleLabel">
                  <property name="text"><string>Welcome back, Operations Manager! 👋</string></property>
                 </widget></item>
@@ -170,10 +208,11 @@ Operations Manager · OMS</string></property>
             </widget>
            </item>
 
-           <!-- Quick log buttons row -->
+           <!-- Log buttons row -->
            <item>
             <widget class="QFrame" name="logButtonsFrame">
              <layout class="QHBoxLayout" name="logButtonsLayout">
+              <property name="spacing"><number>10</number></property>
               <item><spacer name="logButtonsSpacer">
                <property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property>
                <property name="sizeHint"><size><width>40</width><height>20</height></size></property>
@@ -188,13 +227,15 @@ Operations Manager · OMS</string></property>
             </widget>
            </item>
 
-           <!-- Stat cards row -->
+           <!-- Stat cards -->
            <item>
             <widget class="QFrame" name="statsFrame">
              <layout class="QHBoxLayout" name="statsLayout">
+              <property name="spacing"><number>14</number></property>
 
               <item><widget class="QFrame" name="cardVisitors">
                <layout class="QVBoxLayout" name="cardVisitorsLayout">
+                <property name="spacing"><number>4</number></property>
                 <item><widget class="QLabel" name="cardVisitorsIcon"><property name="text"><string>👤</string></property></widget></item>
                 <item><widget class="QLabel" name="cardVisitorsValue"><property name="text"><string>12</string></property></widget></item>
                 <item><widget class="QLabel" name="cardVisitorsCaption"><property name="text"><string>Visitors Today</string></property></widget></item>
@@ -203,6 +244,7 @@ Operations Manager · OMS</string></property>
 
               <item><widget class="QFrame" name="cardMaintenance">
                <layout class="QVBoxLayout" name="cardMaintenanceLayout">
+                <property name="spacing"><number>4</number></property>
                 <item><widget class="QLabel" name="cardMaintenanceIcon"><property name="text"><string>🔧</string></property></widget></item>
                 <item><widget class="QLabel" name="cardMaintenanceValue"><property name="text"><string>6</string></property></widget></item>
                 <item><widget class="QLabel" name="cardMaintenanceCaption"><property name="text"><string>Open Maintenance Requests</string></property></widget></item>
@@ -211,6 +253,7 @@ Operations Manager · OMS</string></property>
 
               <item><widget class="QFrame" name="cardInspections">
                <layout class="QVBoxLayout" name="cardInspectionsLayout">
+                <property name="spacing"><number>4</number></property>
                 <item><widget class="QLabel" name="cardInspectionsIcon"><property name="text"><string>🔍</string></property></widget></item>
                 <item><widget class="QLabel" name="cardInspectionsValue"><property name="text"><string>3/5</string></property></widget></item>
                 <item><widget class="QLabel" name="cardInspectionsCaption"><property name="text"><string>Facility Inspections</string></property></widget></item>
@@ -219,6 +262,7 @@ Operations Manager · OMS</string></property>
 
               <item><widget class="QFrame" name="cardSafety">
                <layout class="QVBoxLayout" name="cardSafetyLayout">
+                <property name="spacing"><number>4</number></property>
                 <item><widget class="QLabel" name="cardSafetyIcon"><property name="text"><string>🛡</string></property></widget></item>
                 <item><widget class="QLabel" name="cardSafetyValue"><property name="text"><string>2</string></property></widget></item>
                 <item><widget class="QLabel" name="cardSafetyCaption"><property name="text"><string>Safety Checks Due</string></property></widget></item>
@@ -227,6 +271,7 @@ Operations Manager · OMS</string></property>
 
               <item><widget class="QFrame" name="cardCompound">
                <layout class="QVBoxLayout" name="cardCompoundLayout">
+                <property name="spacing"><number>4</number></property>
                 <item><widget class="QLabel" name="cardCompoundIcon"><property name="text"><string>🌳</string></property></widget></item>
                 <item><widget class="QLabel" name="cardCompoundValue"><property name="text"><string>Clear</string></property></widget></item>
                 <item><widget class="QLabel" name="cardCompoundCaption"><property name="text"><string>Compound Status</string></property></widget></item>
@@ -237,21 +282,52 @@ Operations Manager · OMS</string></property>
             </widget>
            </item>
 
-           <!-- Content grid row 1 -->
+           <!-- Content grid row 1: Checklist / Maintenance / Activity -->
            <item>
             <widget class="QFrame" name="gridFrame1">
              <layout class="QHBoxLayout" name="gridLayout1">
+              <property name="spacing"><number>14</number></property>
 
+              <!-- Facility Inspection Checklist -->
               <item><widget class="QFrame" name="checklistPanel">
                <layout class="QVBoxLayout" name="checklistPanelLayout">
-                <item><widget class="QLabel" name="checklistTitle"><property name="text"><string>Facility Inspection Checklist</string></property></widget></item>
+                <property name="spacing"><number>10</number></property>
+                <item>
+                 <layout class="QHBoxLayout" name="checklistHeaderLayout">
+                  <item><widget class="QLabel" name="checklistTitle">
+                   <property name="text"><string>Facility Inspection Checklist</string></property>
+                  </widget></item>
+                  <item><spacer name="checklistHeaderSpacer">
+                   <property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property>
+                   <property name="sizeHint"><size><width>20</width><height>20</height></size></property>
+                  </spacer></item>
+                  <item><widget class="QPushButton" name="btnViewChecklist">
+                   <property name="text"><string>View all ›</string></property>
+                  </widget></item>
+                 </layout>
+                </item>
                 <item><widget class="QListWidget" name="checklistWidget"/></item>
                </layout>
               </widget></item>
 
+              <!-- Maintenance Requests -->
               <item><widget class="QFrame" name="maintenancePanel">
                <layout class="QVBoxLayout" name="maintenancePanelLayout">
-                <item><widget class="QLabel" name="maintenanceTitle"><property name="text"><string>Maintenance Requests</string></property></widget></item>
+                <property name="spacing"><number>10</number></property>
+                <item>
+                 <layout class="QHBoxLayout" name="maintenanceHeaderLayout">
+                  <item><widget class="QLabel" name="maintenanceTitle">
+                   <property name="text"><string>Maintenance Requests</string></property>
+                  </widget></item>
+                  <item><spacer name="maintenanceHeaderSpacer">
+                   <property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property>
+                   <property name="sizeHint"><size><width>20</width><height>20</height></size></property>
+                  </spacer></item>
+                  <item><widget class="QPushButton" name="btnViewMaintenance">
+                   <property name="text"><string>View all ›</string></property>
+                  </widget></item>
+                 </layout>
+                </item>
                 <item>
                  <widget class="QTableWidget" name="maintenanceTable">
                   <property name="columnCount"><number>3</number></property>
@@ -263,9 +339,24 @@ Operations Manager · OMS</string></property>
                </layout>
               </widget></item>
 
+              <!-- Recent Activity -->
               <item><widget class="QFrame" name="activityPanel">
                <layout class="QVBoxLayout" name="activityPanelLayout">
-                <item><widget class="QLabel" name="activityTitle"><property name="text"><string>Recent Activity</string></property></widget></item>
+                <property name="spacing"><number>10</number></property>
+                <item>
+                 <layout class="QHBoxLayout" name="activityHeaderLayout">
+                  <item><widget class="QLabel" name="activityTitle">
+                   <property name="text"><string>Recent Activity</string></property>
+                  </widget></item>
+                  <item><spacer name="activityHeaderSpacer">
+                   <property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property>
+                   <property name="sizeHint"><size><width>20</width><height>20</height></size></property>
+                  </spacer></item>
+                  <item><widget class="QPushButton" name="btnViewActivity">
+                   <property name="text"><string>View all ›</string></property>
+                  </widget></item>
+                 </layout>
+                </item>
                 <item><widget class="QListWidget" name="activityListWidget"/></item>
                </layout>
               </widget></item>
@@ -278,7 +369,21 @@ Operations Manager · OMS</string></property>
            <item>
             <widget class="QFrame" name="visitorPanel">
              <layout class="QVBoxLayout" name="visitorPanelLayout">
-              <item><widget class="QLabel" name="visitorTitle"><property name="text"><string>Today's Visitor Log</string></property></widget></item>
+              <property name="spacing"><number>10</number></property>
+              <item>
+               <layout class="QHBoxLayout" name="visitorHeaderLayout">
+                <item><widget class="QLabel" name="visitorTitle">
+                 <property name="text"><string>Today's Visitor Log</string></property>
+                </widget></item>
+                <item><spacer name="visitorHeaderSpacer">
+                 <property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property>
+                 <property name="sizeHint"><size><width>20</width><height>20</height></size></property>
+                </spacer></item>
+                <item><widget class="QPushButton" name="btnViewVisitorLog">
+                 <property name="text"><string>View all ›</string></property>
+                </widget></item>
+               </layout>
+              </item>
               <item>
                <widget class="QTableWidget" name="visitorLogTable">
                 <property name="columnCount"><number>4</number></property>
@@ -292,19 +397,29 @@ Operations Manager · OMS</string></property>
             </widget>
            </item>
 
-           <!-- Quick actions -->
+           <!-- Quick Actions -->
            <item>
             <widget class="QFrame" name="quickActionsFrame">
              <layout class="QVBoxLayout" name="quickActionsOuterLayout">
-              <item><widget class="QLabel" name="quickActionsTitle"><property name="text"><string>Quick Actions</string></property></widget></item>
+              <property name="spacing"><number>12</number></property>
+              <item><widget class="QLabel" name="quickActionsTitle">
+               <property name="text"><string>Quick Actions</string></property>
+              </widget></item>
               <item>
                <layout class="QHBoxLayout" name="quickActionsLayout">
-                <item><widget class="QPushButton" name="btnQaReportMaintenance"><property name="text"><string>✎
-Report Maintenance</string></property></widget></item>
-                <item><widget class="QPushButton" name="btnQaRegisterVisitor"><property name="text"><string>👤
-Register Visitor</string></property></widget></item>
-                <item><widget class="QPushButton" name="btnQaLogInspection"><property name="text"><string>✓
-Log Inspection</string></property></widget></item>
+                <property name="spacing"><number>12</number></property>
+                <item><widget class="QPushButton" name="btnQaReportMaintenance">
+                 <property name="text"><string>✎
+Report Maintenance</string></property>
+                </widget></item>
+                <item><widget class="QPushButton" name="btnQaRegisterVisitor">
+                 <property name="text"><string>👤
+Register Visitor</string></property>
+                </widget></item>
+                <item><widget class="QPushButton" name="btnQaLogInspection">
+                 <property name="text"><string>✓
+Log Inspection</string></property>
+                </widget></item>
                </layout>
               </item>
              </layout>

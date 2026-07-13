@@ -37,11 +37,12 @@ class Ui_OpsManagerWindow(object):
         self.topBarFrame.setMinimumSize(QSize(0, 64))
         self.topBarFrame.setMaximumSize(QSize(16777215, 64))
         self.topBarLayout = QHBoxLayout(self.topBarFrame)
+        self.topBarLayout.setSpacing(10)
         self.topBarLayout.setObjectName(u"topBarLayout")
         self.topBarLayout.setContentsMargins(18, -1, 18, -1)
         self.btnMenuToggle = QPushButton(self.topBarFrame)
         self.btnMenuToggle.setObjectName(u"btnMenuToggle")
-        self.btnMenuToggle.setMaximumSize(QSize(36, 36))
+        self.btnMenuToggle.setMaximumSize(QSize(38, 38))
 
         self.topBarLayout.addWidget(self.btnMenuToggle)
 
@@ -52,7 +53,8 @@ class Ui_OpsManagerWindow(object):
 
         self.searchBar = QLineEdit(self.topBarFrame)
         self.searchBar.setObjectName(u"searchBar")
-        self.searchBar.setMinimumSize(QSize(380, 0))
+        self.searchBar.setMinimumSize(QSize(360, 36))
+        self.searchBar.setMaximumSize(QSize(480, 36))
 
         self.topBarLayout.addWidget(self.searchBar)
 
@@ -62,12 +64,14 @@ class Ui_OpsManagerWindow(object):
 
         self.btnNotifications = QPushButton(self.topBarFrame)
         self.btnNotifications.setObjectName(u"btnNotifications")
+        self.btnNotifications.setMinimumSize(QSize(36, 36))
         self.btnNotifications.setMaximumSize(QSize(36, 36))
 
         self.topBarLayout.addWidget(self.btnNotifications)
 
         self.btnMessages = QPushButton(self.topBarFrame)
         self.btnMessages.setObjectName(u"btnMessages")
+        self.btnMessages.setMinimumSize(QSize(36, 36))
         self.btnMessages.setMaximumSize(QSize(36, 36))
 
         self.topBarLayout.addWidget(self.btnMessages)
@@ -75,8 +79,9 @@ class Ui_OpsManagerWindow(object):
         self.profileFrame = QFrame(self.topBarFrame)
         self.profileFrame.setObjectName(u"profileFrame")
         self.profileLayout = QVBoxLayout(self.profileFrame)
-        self.profileLayout.setSpacing(0)
+        self.profileLayout.setSpacing(1)
         self.profileLayout.setObjectName(u"profileLayout")
+        self.profileLayout.setContentsMargins(10, -1, -1, -1)
         self.profileNameLabel = QLabel(self.profileFrame)
         self.profileNameLabel.setObjectName(u"profileNameLabel")
 
@@ -211,17 +216,17 @@ class Ui_OpsManagerWindow(object):
         self.contentScrollArea.setFrameShape(QFrame.Shape.NoFrame)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1400, 1400))
         self.contentLayout = QVBoxLayout(self.scrollAreaWidgetContents)
         self.contentLayout.setSpacing(18)
         self.contentLayout.setObjectName(u"contentLayout")
-        self.contentLayout.setContentsMargins(28, 22, 28, 28)
+        self.contentLayout.setContentsMargins(28, 24, 28, 28)
         self.headerFrame = QFrame(self.scrollAreaWidgetContents)
         self.headerFrame.setObjectName(u"headerFrame")
         self.headerTopLayout = QHBoxLayout(self.headerFrame)
+        self.headerTopLayout.setSpacing(12)
         self.headerTopLayout.setObjectName(u"headerTopLayout")
         self.welcomeTextLayout = QVBoxLayout()
-        self.welcomeTextLayout.setSpacing(2)
+        self.welcomeTextLayout.setSpacing(3)
         self.welcomeTextLayout.setObjectName(u"welcomeTextLayout")
         self.titleLabel = QLabel(self.headerFrame)
         self.titleLabel.setObjectName(u"titleLabel")
@@ -251,6 +256,7 @@ class Ui_OpsManagerWindow(object):
         self.logButtonsFrame = QFrame(self.scrollAreaWidgetContents)
         self.logButtonsFrame.setObjectName(u"logButtonsFrame")
         self.logButtonsLayout = QHBoxLayout(self.logButtonsFrame)
+        self.logButtonsLayout.setSpacing(10)
         self.logButtonsLayout.setObjectName(u"logButtonsLayout")
         self.logButtonsSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -272,10 +278,12 @@ class Ui_OpsManagerWindow(object):
         self.statsFrame = QFrame(self.scrollAreaWidgetContents)
         self.statsFrame.setObjectName(u"statsFrame")
         self.statsLayout = QHBoxLayout(self.statsFrame)
+        self.statsLayout.setSpacing(14)
         self.statsLayout.setObjectName(u"statsLayout")
         self.cardVisitors = QFrame(self.statsFrame)
         self.cardVisitors.setObjectName(u"cardVisitors")
         self.cardVisitorsLayout = QVBoxLayout(self.cardVisitors)
+        self.cardVisitorsLayout.setSpacing(4)
         self.cardVisitorsLayout.setObjectName(u"cardVisitorsLayout")
         self.cardVisitorsIcon = QLabel(self.cardVisitors)
         self.cardVisitorsIcon.setObjectName(u"cardVisitorsIcon")
@@ -298,6 +306,7 @@ class Ui_OpsManagerWindow(object):
         self.cardMaintenance = QFrame(self.statsFrame)
         self.cardMaintenance.setObjectName(u"cardMaintenance")
         self.cardMaintenanceLayout = QVBoxLayout(self.cardMaintenance)
+        self.cardMaintenanceLayout.setSpacing(4)
         self.cardMaintenanceLayout.setObjectName(u"cardMaintenanceLayout")
         self.cardMaintenanceIcon = QLabel(self.cardMaintenance)
         self.cardMaintenanceIcon.setObjectName(u"cardMaintenanceIcon")
@@ -320,6 +329,7 @@ class Ui_OpsManagerWindow(object):
         self.cardInspections = QFrame(self.statsFrame)
         self.cardInspections.setObjectName(u"cardInspections")
         self.cardInspectionsLayout = QVBoxLayout(self.cardInspections)
+        self.cardInspectionsLayout.setSpacing(4)
         self.cardInspectionsLayout.setObjectName(u"cardInspectionsLayout")
         self.cardInspectionsIcon = QLabel(self.cardInspections)
         self.cardInspectionsIcon.setObjectName(u"cardInspectionsIcon")
@@ -342,6 +352,7 @@ class Ui_OpsManagerWindow(object):
         self.cardSafety = QFrame(self.statsFrame)
         self.cardSafety.setObjectName(u"cardSafety")
         self.cardSafetyLayout = QVBoxLayout(self.cardSafety)
+        self.cardSafetyLayout.setSpacing(4)
         self.cardSafetyLayout.setObjectName(u"cardSafetyLayout")
         self.cardSafetyIcon = QLabel(self.cardSafety)
         self.cardSafetyIcon.setObjectName(u"cardSafetyIcon")
@@ -364,6 +375,7 @@ class Ui_OpsManagerWindow(object):
         self.cardCompound = QFrame(self.statsFrame)
         self.cardCompound.setObjectName(u"cardCompound")
         self.cardCompoundLayout = QVBoxLayout(self.cardCompound)
+        self.cardCompoundLayout.setSpacing(4)
         self.cardCompoundLayout.setObjectName(u"cardCompoundLayout")
         self.cardCompoundIcon = QLabel(self.cardCompound)
         self.cardCompoundIcon.setObjectName(u"cardCompoundIcon")
@@ -389,15 +401,31 @@ class Ui_OpsManagerWindow(object):
         self.gridFrame1 = QFrame(self.scrollAreaWidgetContents)
         self.gridFrame1.setObjectName(u"gridFrame1")
         self.gridLayout1 = QHBoxLayout(self.gridFrame1)
+        self.gridLayout1.setSpacing(14)
         self.gridLayout1.setObjectName(u"gridLayout1")
         self.checklistPanel = QFrame(self.gridFrame1)
         self.checklistPanel.setObjectName(u"checklistPanel")
         self.checklistPanelLayout = QVBoxLayout(self.checklistPanel)
+        self.checklistPanelLayout.setSpacing(10)
         self.checklistPanelLayout.setObjectName(u"checklistPanelLayout")
+        self.checklistHeaderLayout = QHBoxLayout()
+        self.checklistHeaderLayout.setObjectName(u"checklistHeaderLayout")
         self.checklistTitle = QLabel(self.checklistPanel)
         self.checklistTitle.setObjectName(u"checklistTitle")
 
-        self.checklistPanelLayout.addWidget(self.checklistTitle)
+        self.checklistHeaderLayout.addWidget(self.checklistTitle)
+
+        self.checklistHeaderSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.checklistHeaderLayout.addItem(self.checklistHeaderSpacer)
+
+        self.btnViewChecklist = QPushButton(self.checklistPanel)
+        self.btnViewChecklist.setObjectName(u"btnViewChecklist")
+
+        self.checklistHeaderLayout.addWidget(self.btnViewChecklist)
+
+
+        self.checklistPanelLayout.addLayout(self.checklistHeaderLayout)
 
         self.checklistWidget = QListWidget(self.checklistPanel)
         self.checklistWidget.setObjectName(u"checklistWidget")
@@ -410,11 +438,26 @@ class Ui_OpsManagerWindow(object):
         self.maintenancePanel = QFrame(self.gridFrame1)
         self.maintenancePanel.setObjectName(u"maintenancePanel")
         self.maintenancePanelLayout = QVBoxLayout(self.maintenancePanel)
+        self.maintenancePanelLayout.setSpacing(10)
         self.maintenancePanelLayout.setObjectName(u"maintenancePanelLayout")
+        self.maintenanceHeaderLayout = QHBoxLayout()
+        self.maintenanceHeaderLayout.setObjectName(u"maintenanceHeaderLayout")
         self.maintenanceTitle = QLabel(self.maintenancePanel)
         self.maintenanceTitle.setObjectName(u"maintenanceTitle")
 
-        self.maintenancePanelLayout.addWidget(self.maintenanceTitle)
+        self.maintenanceHeaderLayout.addWidget(self.maintenanceTitle)
+
+        self.maintenanceHeaderSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.maintenanceHeaderLayout.addItem(self.maintenanceHeaderSpacer)
+
+        self.btnViewMaintenance = QPushButton(self.maintenancePanel)
+        self.btnViewMaintenance.setObjectName(u"btnViewMaintenance")
+
+        self.maintenanceHeaderLayout.addWidget(self.btnViewMaintenance)
+
+
+        self.maintenancePanelLayout.addLayout(self.maintenanceHeaderLayout)
 
         self.maintenanceTable = QTableWidget(self.maintenancePanel)
         if (self.maintenanceTable.columnCount() < 3):
@@ -436,11 +479,26 @@ class Ui_OpsManagerWindow(object):
         self.activityPanel = QFrame(self.gridFrame1)
         self.activityPanel.setObjectName(u"activityPanel")
         self.activityPanelLayout = QVBoxLayout(self.activityPanel)
+        self.activityPanelLayout.setSpacing(10)
         self.activityPanelLayout.setObjectName(u"activityPanelLayout")
+        self.activityHeaderLayout = QHBoxLayout()
+        self.activityHeaderLayout.setObjectName(u"activityHeaderLayout")
         self.activityTitle = QLabel(self.activityPanel)
         self.activityTitle.setObjectName(u"activityTitle")
 
-        self.activityPanelLayout.addWidget(self.activityTitle)
+        self.activityHeaderLayout.addWidget(self.activityTitle)
+
+        self.activityHeaderSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.activityHeaderLayout.addItem(self.activityHeaderSpacer)
+
+        self.btnViewActivity = QPushButton(self.activityPanel)
+        self.btnViewActivity.setObjectName(u"btnViewActivity")
+
+        self.activityHeaderLayout.addWidget(self.btnViewActivity)
+
+
+        self.activityPanelLayout.addLayout(self.activityHeaderLayout)
 
         self.activityListWidget = QListWidget(self.activityPanel)
         self.activityListWidget.setObjectName(u"activityListWidget")
@@ -456,11 +514,26 @@ class Ui_OpsManagerWindow(object):
         self.visitorPanel = QFrame(self.scrollAreaWidgetContents)
         self.visitorPanel.setObjectName(u"visitorPanel")
         self.visitorPanelLayout = QVBoxLayout(self.visitorPanel)
+        self.visitorPanelLayout.setSpacing(10)
         self.visitorPanelLayout.setObjectName(u"visitorPanelLayout")
+        self.visitorHeaderLayout = QHBoxLayout()
+        self.visitorHeaderLayout.setObjectName(u"visitorHeaderLayout")
         self.visitorTitle = QLabel(self.visitorPanel)
         self.visitorTitle.setObjectName(u"visitorTitle")
 
-        self.visitorPanelLayout.addWidget(self.visitorTitle)
+        self.visitorHeaderLayout.addWidget(self.visitorTitle)
+
+        self.visitorHeaderSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.visitorHeaderLayout.addItem(self.visitorHeaderSpacer)
+
+        self.btnViewVisitorLog = QPushButton(self.visitorPanel)
+        self.btnViewVisitorLog.setObjectName(u"btnViewVisitorLog")
+
+        self.visitorHeaderLayout.addWidget(self.btnViewVisitorLog)
+
+
+        self.visitorPanelLayout.addLayout(self.visitorHeaderLayout)
 
         self.visitorLogTable = QTableWidget(self.visitorPanel)
         if (self.visitorLogTable.columnCount() < 4):
@@ -484,6 +557,7 @@ class Ui_OpsManagerWindow(object):
         self.quickActionsFrame = QFrame(self.scrollAreaWidgetContents)
         self.quickActionsFrame.setObjectName(u"quickActionsFrame")
         self.quickActionsOuterLayout = QVBoxLayout(self.quickActionsFrame)
+        self.quickActionsOuterLayout.setSpacing(12)
         self.quickActionsOuterLayout.setObjectName(u"quickActionsOuterLayout")
         self.quickActionsTitle = QLabel(self.quickActionsFrame)
         self.quickActionsTitle.setObjectName(u"quickActionsTitle")
@@ -491,6 +565,7 @@ class Ui_OpsManagerWindow(object):
         self.quickActionsOuterLayout.addWidget(self.quickActionsTitle)
 
         self.quickActionsLayout = QHBoxLayout()
+        self.quickActionsLayout.setSpacing(12)
         self.quickActionsLayout.setObjectName(u"quickActionsLayout")
         self.btnQaReportMaintenance = QPushButton(self.quickActionsFrame)
         self.btnQaReportMaintenance.setObjectName(u"btnQaReportMaintenance")
@@ -573,7 +648,9 @@ class Ui_OpsManagerWindow(object):
         self.cardCompoundValue.setText(QCoreApplication.translate("OpsManagerWindow", u"Clear", None))
         self.cardCompoundCaption.setText(QCoreApplication.translate("OpsManagerWindow", u"Compound Status", None))
         self.checklistTitle.setText(QCoreApplication.translate("OpsManagerWindow", u"Facility Inspection Checklist", None))
+        self.btnViewChecklist.setText(QCoreApplication.translate("OpsManagerWindow", u"View all \u203a", None))
         self.maintenanceTitle.setText(QCoreApplication.translate("OpsManagerWindow", u"Maintenance Requests", None))
+        self.btnViewMaintenance.setText(QCoreApplication.translate("OpsManagerWindow", u"View all \u203a", None))
         ___qtablewidgetitem = self.maintenanceTable.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("OpsManagerWindow", u"Issue", None))
         ___qtablewidgetitem1 = self.maintenanceTable.horizontalHeaderItem(1)
@@ -581,7 +658,9 @@ class Ui_OpsManagerWindow(object):
         ___qtablewidgetitem2 = self.maintenanceTable.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("OpsManagerWindow", u"Priority", None))
         self.activityTitle.setText(QCoreApplication.translate("OpsManagerWindow", u"Recent Activity", None))
+        self.btnViewActivity.setText(QCoreApplication.translate("OpsManagerWindow", u"View all \u203a", None))
         self.visitorTitle.setText(QCoreApplication.translate("OpsManagerWindow", u"Today's Visitor Log", None))
+        self.btnViewVisitorLog.setText(QCoreApplication.translate("OpsManagerWindow", u"View all \u203a", None))
         ___qtablewidgetitem3 = self.visitorLogTable.horizontalHeaderItem(0)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("OpsManagerWindow", u"Visitor", None))
         ___qtablewidgetitem4 = self.visitorLogTable.horizontalHeaderItem(1)

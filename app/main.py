@@ -15,7 +15,17 @@ import sys
 import os
 
 # pyrefly: ignore [missing-import]
-from PyQt6.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QTableWidgetItem
+from PyQt6.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QListWidgetItem,
+    QTableWidgetItem,
+    QHeaderView,
+    QAbstractItemView,
+)
+
+# pyrefly: ignore [missing-import]
+from PyQt6.QtCore import Qt
 
 from generated.ui_operations_manager_dashboard import Ui_OpsManagerWindow
 
@@ -29,17 +39,16 @@ class OpsManagerWindow(QMainWindow):
         self._sidebar_expanded = True
         self._make_nav_buttons_checkable()
         self._connect_signals()
+        self._configure_lists_and_tables()
         self._load_placeholder_data()
 
     def _toggle_sidebar(self):
-        """Collapse/expand the sidebar — mirrors the hamburger icon (☰) in the mockup."""
         self._sidebar_expanded = not self._sidebar_expanded
         width = 250 if self._sidebar_expanded else 0
         self.ui.sidebarFrame.setMaximumWidth(width)
         self.ui.sidebarFrame.setMinimumWidth(width)
 
     def _make_nav_buttons_checkable(self):
-        """Sidebar buttons behave like a tab bar: one active at a time."""
         self.nav_buttons = [
             self.ui.btnDashboard,
             self.ui.btnOfficeCleanliness,
@@ -60,48 +69,79 @@ class OpsManagerWindow(QMainWindow):
         self.ui.btnLogMaintenance.clicked.connect(self._on_log_maintenance)
         self.ui.btnLogInspection.clicked.connect(self._on_log_inspection)
 
-        # Quick Actions row duplicates the header buttons' intent, plus visitor registration
         self.ui.btnQaReportMaintenance.clicked.connect(self._on_log_maintenance)
         self.ui.btnQaLogInspection.clicked.connect(self._on_log_inspection)
         self.ui.btnQaRegisterVisitor.clicked.connect(self._on_register_visitor)
 
-        # Top bar
         self.ui.btnMenuToggle.clicked.connect(self._toggle_sidebar)
         self.ui.btnNotifications.clicked.connect(lambda: print("Notifications clicked"))
         self.ui.btnMessages.clicked.connect(lambda: print("Messages clicked"))
+
+        self.ui.btnViewChecklist.clicked.connect(
+            lambda: self._on_view_all("Facility Inspections")
+        )
+        self.ui.btnViewMaintenance.clicked.connect(
+            lambda: self._on_view_all("Maintenance Requests")
+        )
+        self.ui.btnViewActivity.clicked.connect(
+            lambda: self._on_view_all("Recent Activity")
+        )
+        self.ui.btnViewVisitorLog.clicked.connect(
+            lambda: self._on_view_all("Visitor Log")
+        )
+
+    def _configure_lists_and_tables(self):
+        """Cap panels to 4–5 visible rows. No internal scrollbar —
+        the 'View all ›' link handles the rest."""
+
+        for lw in (self.ui.checklistWidget, self.ui.activityListWidget):
+            lw.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            lw.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            lw.setMaximumHeight(185)
+            lw.setFrameShape(lw.frameShape().NoFrame)
+
+        for table in (self.ui.maintenanceTable, self.ui.visitorLogTable):
+            # removes the black corner button
+            table.verticalHeader().setVisible(False)
+            table.horizontalHeader().setStretchLastSection(True)
+            table.horizontalHeader().setSectionResizeMode(
+                QHeaderView.ResizeMode.Stretch
+            )
+            table.setShowGrid(False)
+            table.setAlternatingRowColors(True)
+            table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+            table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+            table.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            table.setMaximumHeight(185)
+            table.verticalHeader().setDefaultSectionSize(38)
 
     def _on_nav_clicked(self):
         sender = self.sender()
         for btn in self.nav_buttons:
             btn.setChecked(btn is sender)
-        # TODO: once each module screen exists, swap the content area
-        # to match (e.g. a QStackedWidget page per sidebar button).
+        # TODO: swap QStackedWidget page here
+
+    def _on_view_all(self, module: str):
+        # TODO: navigate to the full module screen via the sidebar button
+        print(f"View all: {module}")
 
     def _on_log_maintenance(self):
-        # TODO: open "New Maintenance Request" dialog -> INSERT into
-        # maintenance_requests table (MySQL).
         print("Log Maintenance Issue clicked")
 
     def _on_log_inspection(self):
-        # TODO: open "New Facility Inspection" dialog -> INSERT into
-        # maintenance_inspections table (MySQL).
         print("Log Facility Inspection clicked")
 
     def _on_register_visitor(self):
-        # TODO: open "Register Visitor" dialog -> INSERT into
-        # visitors table (MySQL).
         print("Register Visitor clicked")
 
     def _load_placeholder_data(self):
-        """Static sample data so the UI is visibly populated.
-        Replace with real queries once the MySQL layer is wired up."""
-
         checklist_items = [
-            "Reception & Lobby — 100%",
-            "Compound & Grounds — 100%",
-            "Washrooms — 100%",
-            "Parking & Perimeter — 40%",
-            "Fire & Safety Equipment — Not started",
+            "01  Reception & Lobby — 100%",
+            "02  Compound & Grounds — 100%",
+            "03  Washrooms — 100%",
+            "04  Parking & Perimeter — 40%",
+            "05  Fire & Safety Equipment — Not started",
         ]
         for text in checklist_items:
             self.ui.checklistWidget.addItem(QListWidgetItem(text))
@@ -110,6 +150,7 @@ class OpsManagerWindow(QMainWindow):
             ("East wing AC unit", "Floor 2", "Pending"),
             ("Parking gate light", "Parking", "Overdue"),
             ("Leaking tap", "Washroom B", "In progress"),
+            ("Broken window latch", "Reception", "Resolved"),
         ]
         self.ui.maintenanceTable.setRowCount(len(maintenance_rows))
         for row, (issue, location, priority) in enumerate(maintenance_rows):
@@ -118,10 +159,11 @@ class OpsManagerWindow(QMainWindow):
             self.ui.maintenanceTable.setItem(row, 2, QTableWidgetItem(priority))
 
         activity_items = [
-            "Visitor Grace Wanjiru checked in — 9:12 AM",
-            "Maintenance request #41 raised — East wing AC — 9:40 AM",
-            "Inspection logged — Washrooms, no issues — 10:05 AM",
-            "Safety flag raised — Parking gate light out — 10:52 AM",
+            "●  Visitor Grace Wanjiru checked in — 9:12 AM",
+            "●  Maintenance request #41 raised — East wing AC — 9:40 AM",
+            "●  Inspection logged — Washrooms, no issues — 10:05 AM",
+            "●  Safety flag raised — Parking gate light out — 10:52 AM",
+            "●  Task 'Restock supplies' marked in progress — 11:20 AM",
         ]
         for text in activity_items:
             self.ui.activityListWidget.addItem(QListWidgetItem(text))
@@ -149,10 +191,8 @@ def load_stylesheet(app: QApplication):
 def main():
     app = QApplication(sys.argv)
     load_stylesheet(app)
-
     window = OpsManagerWindow()
     window.showMaximized()
-
     sys.exit(app.exec())
 
 
