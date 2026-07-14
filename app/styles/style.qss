@@ -260,6 +260,8 @@ QAbstractScrollArea > QWidget {
 #maintenancePanel,
 #activityPanel,
 #visitorPanel,
+#lineChartPanel,
+#donutChartPanel,
 #quickActionsFrame {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
@@ -273,6 +275,14 @@ QAbstractScrollArea > QWidget {
     padding: 0px;
 }
 
+#leftColumn,
+#rightColumn {
+    background-color: transparent;
+    border: none;
+}
+
+#lineChartTitle,
+#donutChartTitle,
 #checklistTitle,
 #maintenanceTitle,
 #activityTitle,
@@ -280,8 +290,8 @@ QAbstractScrollArea > QWidget {
 #quickActionsTitle {
     font-size: 14px;
     font-weight: bold;
-    color: #171b24;
-    background-color: #f1f5f9;
+    color: #0f172a;
+    background-color: transparent;
 }
 
 /* "View all ›" links */
