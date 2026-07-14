@@ -6,7 +6,7 @@ QWidget {
 }
 
 QMainWindow, #scrollAreaWidgetContents, QScrollArea {
-    background-color: #f5f1e8;
+    background-color: #bdb49e;
     border: none;
 }
 
@@ -98,6 +98,95 @@ QMainWindow, #scrollAreaWidgetContents, QScrollArea {
     min-width: 42px;
     max-height: 42px;
     min-height: 42px;
+}
+
+/* ============ STACKED CONTENT ============ */
+#contentStack {
+    background-color: #f5f1e8;
+}
+
+/* ============ MODULE VIEW HEADERS ============ */
+#viewTitleFrame {
+    background-color: transparent;
+}
+
+#viewTitleLabel {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1c1c1c;
+}
+
+#viewSubtitleLabel {
+    font-size: 13px;
+    color: #7a7670;
+    padding-top: 2px;
+}
+
+/* ============ DIALOGS ============ */
+#OMSDialog {
+    background-color: #f5f1e8;
+}
+
+#dialogTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1c1c1c;
+}
+
+#dialogSep {
+    color: #e5e0d3;
+}
+
+#dialogFieldLabel {
+    font-size: 12px;
+    font-weight: bold;
+    color: #5a5650;
+}
+
+#dialogInput {
+    background-color: #ffffff;
+    border: 1px solid #d8d2c4;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+#dialogInput:focus {
+    border: 1px solid #e8a63c;
+}
+
+#dialogCombo {
+    background-color: #ffffff;
+    border: 1px solid #d8d2c4;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+#btnDialogCancel {
+    background-color: #ffffff;
+    border: 1px solid #d8d2c4;
+    border-radius: 6px;
+    padding: 9px 20px;
+    font-size: 13px;
+}
+
+#btnDialogCancel:hover {
+    border: 1px solid #b8b2a4;
+}
+
+#btnDialogSubmit {
+    background-color: #14171f;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#btnDialogSubmit:hover {
+    background-color: #1e2330;
 }
 
 #companyLabel {
@@ -244,7 +333,7 @@ QMainWindow, #scrollAreaWidgetContents, QScrollArea {
 
 /* "View all ›" link buttons in panel headers */
 #btnViewChecklist, #btnViewMaintenance,
-#btnViewActivity, #btnViewVisitorLog {
+#btnViewActivity,#btnViewVisitorLog{
     background-color: transparent;
     color: #b8791f;
     border: none;
