@@ -269,16 +269,12 @@ QAbstractScrollArea > QWidget {
     padding: 18px;
 }
 
-#gridFrame1 {
+#contentGridFrame,
+#row1Frame,
+#row2Frame {
     background-color: transparent;
     border: none;
     padding: 0px;
-}
-
-#leftColumn,
-#rightColumn {
-    background-color: transparent;
-    border: none;
 }
 
 #lineChartTitle,
