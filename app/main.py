@@ -20,7 +20,6 @@ from PyQt6.QtWidgets import (
     QLineEdit,
     QPushButton,
     QStackedWidget,
-    QSizePolicy,
 )
 
 # pyrefly: ignore [missing-import]
@@ -32,6 +31,9 @@ from views.dialogs.log_maintenance_dialog import LogMaintenanceDialog
 from views.dialogs.log_inspection_dialog import LogInspectionDialog
 from views.dialogs.confirm_logout_dialog import ConfirmLogoutDialog
 
+# pyrefly: ignore [missing-import]
+from views.dialogs.register_visitor_dialog import RegisterVisitorDialog
+
 
 class OpsManagerWindow(QMainWindow):
     def __init__(self):
@@ -41,9 +43,9 @@ class OpsManagerWindow(QMainWindow):
         self._sidebar_expanded = True
         self._build_ui()
         self._wire_signals()
-        self._navigate(0)  # start on Dashboard
+        self._navigate(0)
 
-    # ── UI construction ──────────────────────────────────────────────────
+    # ── UI construction ──────────────────────────────────────────────
     def _build_ui(self):
         root_widget = QWidget()
         self.setCentralWidget(root_widget)
@@ -62,7 +64,7 @@ class OpsManagerWindow(QMainWindow):
         body_hl.addWidget(self._build_stack())
         root_vl.addWidget(body)
 
-    # ── Top bar ──────────────────────────────────────────────────────────
+    # ── Top bar ──────────────────────────────────────────────────────
     def _build_top_bar(self):
         bar = QFrame()
         bar.setObjectName("topBarFrame")
@@ -109,7 +111,7 @@ class OpsManagerWindow(QMainWindow):
         hl.addWidget(profile)
         return bar
 
-    # ── Sidebar ──────────────────────────────────────────────────────────
+    # ── Sidebar ──────────────────────────────────────────────────────
     def _build_sidebar(self):
         self.sidebarFrame = QFrame()
         self.sidebarFrame.setObjectName("sidebarFrame")
@@ -122,6 +124,7 @@ class OpsManagerWindow(QMainWindow):
         logo = QLabel("OM")
         logo.setObjectName("logoLabel")
         logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        logo.setFixedSize(42, 42)
 
         company = QLabel("Mfano Bora Africa\nOperations Manager · OMS")
         company.setObjectName("companyLabel")
@@ -131,35 +134,34 @@ class OpsManagerWindow(QMainWindow):
         vl.addWidget(company)
         vl.addWidget(self._h_line())
 
-        # Nav buttons with page index
         self._nav_items = [
-            ("🏠  Dashboard", 0),
-            ("🧹  Office Cleanliness", 2),
-            ("🌳  Compound Management", 3),
-            ("🔍  Facility Inspections", 4),
-            ("🛡  Office Safety", 5),
-            ("🧾  Visitor Registration", 6),
-            ("🔧  Maintenance Requests", 7),
+            ("🏠  Dashboard", 0, None),
+            ("🧹  Office Cleanliness", 2, "sectionDailyOps"),
+            ("🌳  Compound Management", 3, None),
+            ("🔍  Facility Inspections", 4, None),
+            ("🛡  Office Safety", 5, None),
+            ("🧾  Visitor Registration", 6, "sectionVisitors"),
+            ("🔧  Maintenance Requests", 7, "sectionMaintenance"),
         ]
+
         self._nav_buttons = []
+        vl.addWidget(self._section_lbl("OVERVIEW", "sectionOverview"))
 
-        sections = {
-            0: ("OVERVIEW", "sectionOverview"),
-            1: ("DAILY OPERATIONS", "sectionDailyOps"),
-            5: ("VISITORS", "sectionVisitors"),
-            6: ("MAINTENANCE", "sectionMaintenance"),
-        }
-
-        for i, (label, page_idx) in enumerate(self._nav_items):
-            if i in sections:
-                lbl = QLabel(sections[i][0])
-                lbl.setObjectName(sections[i][1])
-                vl.addWidget(lbl)
+        for i, (label, page_idx, section) in enumerate(self._nav_items):
+            if section:
+                vl.addWidget(
+                    self._section_lbl(
+                        section.replace("section", "")
+                        .replace("DailyOps", "DAILY OPERATIONS")
+                        .replace("Visitors", "VISITORS")
+                        .replace("Maintenance", "MAINTENANCE"),
+                        section,
+                    )
+                )
             btn = QPushButton(label)
-            btn.setObjectName(f"navBtn_{i}")
             btn.setCheckable(True)
             btn.clicked.connect(
-                lambda checked, idx=page_idx, btn_i=i: self._navigate(idx, btn_i)
+                lambda checked, idx=page_idx, bi=i: self._navigate(idx, bi)
             )
             self._nav_buttons.append(btn)
             vl.addWidget(btn)
@@ -168,27 +170,24 @@ class OpsManagerWindow(QMainWindow):
         vl.addWidget(self._h_line())
 
         self.btnSettings = QPushButton("⚙  Settings")
-        self.btnSettings.setObjectName("sidebarFrame")
         self.btnLogout = QPushButton("🚪  Logout")
-        self.btnLogout.setObjectName("sidebarFrame")
         vl.addWidget(self.btnSettings)
         vl.addWidget(self.btnLogout)
-
         return self.sidebarFrame
 
-    # ── Stacked pages ────────────────────────────────────────────────────
+    # ── Stacked pages ────────────────────────────────────────────────
     def _build_stack(self):
         self.stack = QStackedWidget()
         self.stack.setObjectName("contentStack")
 
-        # Page 0: Dashboard
+        # Index 0 — Dashboard
         self.dashboardView = DashboardView()
-        self.stack.addWidget(self.dashboardView)  # index 0
+        self.stack.addWidget(self.dashboardView)
 
-        # Page 1: placeholder (unused — keeps index alignment)
-        self.stack.addWidget(QWidget())  # index 1
+        # Index 1 — unused (keeps indices aligned)
+        self.stack.addWidget(QWidget())
 
-        # Pages 2–7: module views
+        # Indices 2–7 — module pages
         module_pages = [
             (
                 "🧹  Office Cleanliness",
@@ -198,23 +197,25 @@ class OpsManagerWindow(QMainWindow):
                     ("Main Office", "James Otieno", "09 Jul 2026", "Done"),
                     ("Boardroom", "Jane Wambui", "09 Jul 2026", "Done"),
                     ("Washrooms", "James Otieno", "09 Jul 2026", "Pending"),
+                    ("Kitchen", "Jane Wambui", "09 Jul 2026", "Done"),
                 ],
                 None,
             ),
             (
                 "🌳  Compound Management",
-                "Monitor compound cleanliness, grounds, and gate access.",
+                "Monitor compound cleanliness, grounds and gate access.",
                 ["Zone", "Checked By", "Date", "Condition"],
                 [
                     ("Main Gate", "Security", "09 Jul 2026", "Clear"),
                     ("Car Park", "Grounds Team", "09 Jul 2026", "Clear"),
                     ("Back Fence", "Grounds Team", "09 Jul 2026", "Needs attention"),
+                    ("Garden", "Grounds Team", "09 Jul 2026", "Clear"),
                 ],
                 None,
             ),
             (
                 "🔍  Facility Inspections",
-                "Log and review facility inspection records.",
+                "Log and review all facility inspection records.",
                 ["Area", "Inspector", "Date", "Status", "Findings"],
                 [
                     (
@@ -251,7 +252,7 @@ class OpsManagerWindow(QMainWindow):
             ),
             (
                 "🛡  Office Safety",
-                "Track safety checks, hazard reports, and compliance.",
+                "Track safety checks, hazard reports and compliance.",
                 ["Check Item", "Checked By", "Date", "Result"],
                 [
                     ("Fire Extinguishers", "Safety Officer", "09 Jul 2026", "OK"),
@@ -262,12 +263,13 @@ class OpsManagerWindow(QMainWindow):
                         "08 Jul 2026",
                         "Needs restock",
                     ),
+                    ("Smoke Detectors", "Safety Officer", "08 Jul 2026", "OK"),
                 ],
                 None,
             ),
             (
                 "🧾  Visitor Registration",
-                "Register new visitors and view today's visitor log.",
+                "Register new visitors and manage today's visitor log.",
                 ["Visitor", "Host", "Purpose", "Check-in", "Check-out", "Status"],
                 [
                     (
@@ -323,12 +325,11 @@ class OpsManagerWindow(QMainWindow):
             view = ModuleView(title, subtitle, cols, rows, action)
             if action:
                 view.actionBtn.clicked.connect(self._action_for_module(title))
-            self.stack.addWidget(view)  # indices 2–7
+            self.stack.addWidget(view)
 
         return self.stack
 
     def _action_for_module(self, title: str):
-        """Return the correct dialog opener for each module's action button."""
         if "Maintenance" in title:
             return self._open_log_maintenance
         if "Inspection" in title:
@@ -337,12 +338,12 @@ class OpsManagerWindow(QMainWindow):
             return self._open_register_visitor
         return lambda: None
 
-    # ── Signal wiring ────────────────────────────────────────────────────
+    # ── Signal wiring ────────────────────────────────────────────────
     def _wire_signals(self):
-        # Top bar
         self.btnMenuToggle.clicked.connect(self._toggle_sidebar)
+        self.btnSettings.clicked.connect(self._open_settings)
+        self.btnLogout.clicked.connect(self._confirm_logout)
 
-        # Dashboard internal buttons
         dv = self.dashboardView
         dv.btnLogMaintenance.clicked.connect(self._open_log_maintenance)
         dv.btnLogInspection.clicked.connect(self._open_log_inspection)
@@ -354,11 +355,7 @@ class OpsManagerWindow(QMainWindow):
         dv.btnQaRegisterVisitor.clicked.connect(self._open_register_visitor)
         dv.btnQaLogInspection.clicked.connect(self._open_log_inspection)
 
-        # Settings / Logout
-        self.btnSettings.clicked.connect(self._open_settings)
-        self.btnLogout.clicked.connect(self._confirm_logout)
-
-    # ── Navigation ───────────────────────────────────────────────────────
+    # ── Navigation ───────────────────────────────────────────────────
     def _navigate(self, page_index: int, nav_btn_index: int = 0):
         self.stack.setCurrentIndex(page_index)
         for i, btn in enumerate(self._nav_buttons):
@@ -368,18 +365,15 @@ class OpsManagerWindow(QMainWindow):
         self._sidebar_expanded = not self._sidebar_expanded
         self.sidebarFrame.setFixedWidth(250 if self._sidebar_expanded else 0)
 
-    # ── Dialog openers ───────────────────────────────────────────────────
+    # ── Dialogs ──────────────────────────────────────────────────────
     def _open_log_maintenance(self):
-        dlg = LogMaintenanceDialog(self)
-        dlg.exec()
+        LogMaintenanceDialog(self).exec()
 
     def _open_log_inspection(self):
-        dlg = LogInspectionDialog(self)
-        dlg.exec()
+        LogInspectionDialog(self).exec()
 
     def _open_register_visitor(self):
-        # Navigates to Visitor Registration module screen
-        self._navigate(6, 5)
+        RegisterVisitorDialog(self).exec()
 
     def _open_settings(self):
         # pyrefly: ignore [missing-import]
@@ -397,19 +391,21 @@ class OpsManagerWindow(QMainWindow):
         if dlg.exec():
             QApplication.quit()
 
-    # ── Helpers ──────────────────────────────────────────────────────────
+    # ── Helpers ──────────────────────────────────────────────────────
     def _lbl(self, text: str, obj_name: str) -> QLabel:
         lbl = QLabel(text)
         lbl.setObjectName(obj_name)
         return lbl
 
     def _h_line(self):
-        # pyrefly: ignore [missing-import]
-        from PyQt6.QtWidgets import QFrame as F
-
-        line = F()
-        line.setFrameShape(F.Shape.HLine)
+        line = QFrame()
+        line.setFrameShape(QFrame.Shape.HLine)
         return line
+
+    def _section_lbl(self, text: str, obj_name: str) -> QLabel:
+        lbl = QLabel(text)
+        lbl.setObjectName(obj_name)
+        return lbl
 
 
 def load_stylesheet(app: QApplication):

@@ -42,6 +42,9 @@ class DashboardView(QWidget):
 
         container = QWidget()
         container.setObjectName("dashContainer")
+        container.setAutoFillBackground(True)
+        self.setAutoFillBackground(True)
+
         root = QVBoxLayout(container)
         root.setContentsMargins(28, 24, 28, 28)
         root.setSpacing(18)

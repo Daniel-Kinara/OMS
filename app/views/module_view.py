@@ -17,12 +17,6 @@ from PyQt6.QtCore import Qt
 
 
 class ModuleView(QWidget):
-    """Generic full-screen module view.
-    Used for Office Cleanliness, Compound Management,
-    Facility Inspections, Office Safety, Visitor Registration,
-    Maintenance Requests — each passes its own title, subtitle,
-    columns and placeholder rows."""
-
     def __init__(
         self,
         title: str,
@@ -45,7 +39,7 @@ class ModuleView(QWidget):
         root.setContentsMargins(28, 24, 28, 28)
         root.setSpacing(18)
 
-        # Header
+        # ── Header ──────────────────────────────────────────
         header = QFrame()
         header.setObjectName("viewTitleFrame")
         hl = QHBoxLayout(header)
@@ -69,11 +63,12 @@ class ModuleView(QWidget):
 
         root.addWidget(header)
 
-        # Table
+        # ── Table panel ─────────────────────────────────────
         panel = QFrame()
         panel.setObjectName("visitorPanel")
         pl = QVBoxLayout(panel)
         pl.setSpacing(10)
+        pl.setContentsMargins(0, 0, 0, 0)
 
         self.table = QTableWidget(len(self._rows), len(self._columns))
         self.table.setHorizontalHeaderLabels(self._columns)
@@ -86,12 +81,11 @@ class ModuleView(QWidget):
         self.table.setAlternatingRowColors(True)
         self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
-        self.table.verticalHeader().setDefaultSectionSize(40)
+        self.table.verticalHeader().setDefaultSectionSize(42)
 
         for r, row in enumerate(self._rows):
             for c, val in enumerate(row):
-                item = QTableWidgetItem(val)
-                self.table.setItem(r, c, item)
+                self.table.setItem(r, c, QTableWidgetItem(val))
 
         pl.addWidget(self.table)
         root.addWidget(panel)
