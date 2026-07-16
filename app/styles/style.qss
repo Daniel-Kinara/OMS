@@ -490,3 +490,49 @@ QScrollBar::handle:horizontal {
 }
 QScrollBar::add-line:horizontal,
 QScrollBar::sub-line:horizontal { width: 0; }
+
+/* ── PROFILE DROPDOWN BUTTON ─────────────────────────────── */
+#btnProfileDropdown {
+    background-color: transparent;
+    color: #e2e8f0;
+    border: none;
+    font-size: 14px;
+    padding: 0px;
+}
+#btnProfileDropdown:hover {
+    color: #ffffff;
+}
+
+/* ── PROFILE MENU ────────────────────────────────────────── */
+#profileMenu {
+    background-color: #1e2a3a;
+    border: 1px solid #2d3f58;
+    border-radius: 10px;
+    padding: 6px;
+}
+QMenu {
+    background-color: #1e2a3a;
+    color: #e2e8f0;
+    border: 1px solid #2d3f58;
+    border-radius: 10px;
+    padding: 6px;
+}
+QMenu::item {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+QMenu::item:selected {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+QMenu::separator {
+    background-color: #2d3f58;
+    height: 1px;
+    margin: 4px 10px;
+}
+QMenu::section {
+    color: #64748b;
+    font-size: 11px;
+    padding: 6px 14px 2px 14px;
+}

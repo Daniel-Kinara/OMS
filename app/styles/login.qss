@@ -1,0 +1,135 @@
+/* ============================================================
+   OMS — Login Screen Stylesheet
+   ============================================================ */
+
+* {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+}
+
+QWidget {
+    background-color: #f0f4f8;
+    color: #1a202c;
+}
+
+/* ── LEFT PANEL (dark branding) ──────────────────────────── */
+#loginLeftPanel {
+    background-color: #1a2535;
+}
+
+#loginLeftPanel * {
+    background-color: transparent;
+    color: #e2e8f0;
+}
+
+#loginLogoBadge {
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 16px;
+    min-width: 72px;
+    max-width: 72px;
+    min-height: 72px;
+    max-height: 72px;
+    qproperty-alignment: AlignCenter;
+}
+
+#loginCompanyLabel {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#loginTaglineLabel {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+#loginDescLabel {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.6;
+    padding-top: 4px;
+}
+
+#loginVersionLabel {
+    color: #4a6080;
+    font-size: 11px;
+    padding-top: 8px;
+}
+
+/* ── RIGHT PANEL (form) ──────────────────────────────────── */
+#loginRightPanel {
+    background-color: #ffffff;
+}
+
+#loginRightPanel * {
+    background-color: transparent;
+    color: #1a202c;
+}
+
+#loginFormTitle {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+#loginFormSubtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+
+#loginFieldLabel {
+    font-size: 13px;
+    font-weight: bold;
+    color: #374151;
+    padding-bottom: 6px;
+}
+
+#loginInput {
+    background-color: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #0f172a;
+}
+
+#loginInput:focus {
+    border: 1.5px solid #2563eb;
+    background-color: #ffffff;
+}
+
+#loginErrorLabel {
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: bold;
+    min-height: 18px;
+}
+
+#loginBtnSignIn {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#loginBtnSignIn:hover {
+    background-color: #1d4ed8;
+}
+
+#loginBtnSignIn:pressed {
+    background-color: #1e40af;
+}
+
+#loginHintLabel {
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.6;
+}

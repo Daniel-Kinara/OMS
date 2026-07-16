@@ -2,7 +2,7 @@
 Operations Management System (OMS)
 Operations Manager Dashboard — fully wired frontend.
 
-Run with:  python app/main.py
+Run with:  python app/login.py
 """
 
 import sys
@@ -20,25 +20,37 @@ from PyQt6.QtWidgets import (
     QLineEdit,
     QPushButton,
     QStackedWidget,
+    QMenu,
 )
 
 # pyrefly: ignore [missing-import]
 from PyQt6.QtCore import Qt
+
+# pyrefly: ignore [missing-import]
+from PyQt6.QtGui import QAction
 
 from views.dashboard_view import DashboardView
 from views.module_view import ModuleView
 from views.dialogs.log_maintenance_dialog import LogMaintenanceDialog
 from views.dialogs.log_inspection_dialog import LogInspectionDialog
 from views.dialogs.confirm_logout_dialog import ConfirmLogoutDialog
-
-# pyrefly: ignore [missing-import]
 from views.dialogs.register_visitor_dialog import RegisterVisitorDialog
 
 
 class OpsManagerWindow(QMainWindow):
-    def __init__(self):
+    def __init__(
+        self,
+        role: str = "Operations Manager",
+        initials: str = "OM",
+        avatar_color: str = "#2563eb",
+        email: str = "",
+    ):
         super().__init__()
-        self.setWindowTitle("Operations Management System — Operations Manager")
+        self._role = role
+        self._initials = initials
+        self._avatar_color = avatar_color
+        self._email = email
+        self.setWindowTitle(f"OMS — {role}")
         self.setMinimumSize(1280, 720)
         self._sidebar_expanded = True
         self._build_ui()
@@ -52,7 +64,6 @@ class OpsManagerWindow(QMainWindow):
         root_vl = QVBoxLayout(root_widget)
         root_vl.setContentsMargins(0, 0, 0, 0)
         root_vl.setSpacing(0)
-
         root_vl.addWidget(self._build_top_bar())
 
         body = QFrame()
@@ -73,18 +84,22 @@ class OpsManagerWindow(QMainWindow):
         hl.setContentsMargins(18, 0, 18, 0)
         hl.setSpacing(10)
 
+        # Hamburger
         self.btnMenuToggle = QPushButton("☰")
         self.btnMenuToggle.setObjectName("btnMenuToggle")
         self.btnMenuToggle.setFixedSize(38, 38)
 
+        # App title
         self.appTitleLabel = QLabel("OPERATIONS MANAGEMENT SYSTEM (OMS)")
         self.appTitleLabel.setObjectName("appTitleLabel")
 
+        # Search
         self.searchBar = QLineEdit()
-        self.searchBar.setPlaceholderText("Search anything…")
+        self.searchBar.setPlaceholderText("Search visitors, tasks, maintenance…")
         self.searchBar.setObjectName("searchBar")
         self.searchBar.setFixedSize(380, 36)
 
+        # Notification + message icons
         self.btnNotifications = QPushButton("🔔")
         self.btnNotifications.setObjectName("btnNotifications")
         self.btnNotifications.setFixedSize(36, 36)
@@ -93,13 +108,33 @@ class OpsManagerWindow(QMainWindow):
         self.btnMessages.setObjectName("btnMessages")
         self.btnMessages.setFixedSize(36, 36)
 
-        profile = QFrame()
-        profile.setObjectName("profileFrame")
-        pv = QVBoxLayout(profile)
-        pv.setContentsMargins(10, 0, 0, 0)
+        # ── Avatar badge + dropdown ──────────────────────────────
+        self.avatarBtn = QPushButton(self._initials)
+        self.avatarBtn.setObjectName("avatarBtn")
+        self.avatarBtn.setFixedSize(38, 38)
+        self.avatarBtn.setStyleSheet(
+            f"background-color: {self._avatar_color}; "
+            f"color: #ffffff; "
+            f"font-weight: bold; "
+            f"font-size: 13px; "
+            f"border-radius: 8px; "
+            f"border: none;"
+        )
+
+        # Name + role block
+        profile_text = QFrame()
+        profile_text.setObjectName("profileFrame")
+        pv = QVBoxLayout(profile_text)
+        pv.setContentsMargins(6, 0, 0, 0)
         pv.setSpacing(1)
-        pv.addWidget(self._lbl("Operations Manager", "profileNameLabel"))
+        pv.addWidget(self._lbl(self._role, "profileNameLabel"))
         pv.addWidget(self._lbl("Full access", "profileRoleLabel"))
+
+        # Dropdown arrow button
+        self.btnProfileDropdown = QPushButton("▾")
+        self.btnProfileDropdown.setObjectName("btnProfileDropdown")
+        self.btnProfileDropdown.setFixedSize(24, 38)
+        self.btnProfileDropdown.clicked.connect(self._show_profile_menu)
 
         hl.addWidget(self.btnMenuToggle)
         hl.addWidget(self.appTitleLabel)
@@ -108,8 +143,37 @@ class OpsManagerWindow(QMainWindow):
         hl.addStretch()
         hl.addWidget(self.btnNotifications)
         hl.addWidget(self.btnMessages)
-        hl.addWidget(profile)
+        hl.addSpacing(10)
+        hl.addWidget(self.avatarBtn)
+        hl.addWidget(profile_text)
+        hl.addWidget(self.btnProfileDropdown)
         return bar
+
+    def _show_profile_menu(self):
+        menu = QMenu(self)
+        menu.setObjectName("profileMenu")
+
+        menu.addSection(f"  {self._role}")
+        menu.addSection(f"  {self._email}")
+        menu.addSeparator()
+
+        action_profile = QAction("👤  My Profile", self)
+        action_settings = QAction("⚙  Settings", self)
+        action_logout = QAction("🚪  Log out", self)
+
+        menu.addAction(action_profile)
+        menu.addAction(action_settings)
+        menu.addSeparator()
+        menu.addAction(action_logout)
+
+        action_settings.triggered.connect(self._open_settings)
+        action_logout.triggered.connect(self._confirm_logout)
+
+        # Position the menu below the dropdown button
+        pos = self.btnProfileDropdown.mapToGlobal(
+            self.btnProfileDropdown.rect().bottomLeft()
+        )
+        menu.exec(pos)
 
     # ── Sidebar ──────────────────────────────────────────────────────
     def _build_sidebar(self):
@@ -180,14 +244,10 @@ class OpsManagerWindow(QMainWindow):
         self.stack = QStackedWidget()
         self.stack.setObjectName("contentStack")
 
-        # Index 0 — Dashboard
         self.dashboardView = DashboardView()
-        self.stack.addWidget(self.dashboardView)
+        self.stack.addWidget(self.dashboardView)  # 0
+        self.stack.addWidget(QWidget())  # 1 unused
 
-        # Index 1 — unused (keeps indices aligned)
-        self.stack.addWidget(QWidget())
-
-        # Indices 2–7 — module pages
         module_pages = [
             (
                 "🧹  Office Cleanliness",
@@ -389,7 +449,16 @@ class OpsManagerWindow(QMainWindow):
     def _confirm_logout(self):
         dlg = ConfirmLogoutDialog(self)
         if dlg.exec():
-            QApplication.quit()
+            self._go_to_login()
+
+    def _go_to_login(self):
+        from login import LoginWindow, load_login_stylesheet
+
+        app = QApplication.instance()
+        load_login_stylesheet(app)
+        self.login = LoginWindow()
+        self.login.showMaximized()
+        self.close()
 
     # ── Helpers ──────────────────────────────────────────────────────
     def _lbl(self, text: str, obj_name: str) -> QLabel:
