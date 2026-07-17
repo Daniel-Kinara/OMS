@@ -120,6 +120,11 @@ QWidget {
     font-weight: bold;
 }
 
+#loginHintLabel {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
 #loginBtnSignIn:hover {
     background-color: #1d4ed8;
 }

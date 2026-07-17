@@ -32,7 +32,7 @@ from PyQt6.QtGui import QColor, QFont
 ROLE_CONFIG = {
     "Operations Manager": ("OpsManagerWindow", "OM", "#2563eb"),
     "CEO": ("CEOWindow", "CE", "#059669"),
-    "Administrator": ("AdminWindow", "AD", "#7c3aed"),
+    "Administrator / COO": ("COOWindow", "CO", "#7c3aed"),
     "HR Manager": ("HRWindow", "HR", "#d97706"),
     "IT Manager": ("ITWindow", "IT", "#0891b2"),
 }
@@ -41,7 +41,7 @@ ROLE_CONFIG = {
 DEMO_USERS = {
     "ops.manager@mfanobora.com": ("password123", "Operations Manager"),
     "ceo@mfanobora.com": ("password123", "CEO"),
-    "admin@mfanobora.com": ("password123", "Administrator"),
+    "coo@mfanobora.com": ("password123", "Administrator / COO"),
     "hr@mfanobora.com": ("password123", "HR Manager"),
     "it@mfanobora.com": ("password123", "IT Manager"),
 }
@@ -152,8 +152,9 @@ class LoginWindow(QWidget):
 
         # Demo hint
         hint = QLabel(
-            "Demo: use ops.manager@mfanobora.com / password123\n"
-            "or ceo@mfanobora.com / password123"
+            "Demo credentials:\n"
+            "ops.manager@mfanobora.com / password123\n"
+            "coo@mfanobora.com / password123"
         )
         hint.setObjectName("loginHintLabel")
         hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -210,24 +211,36 @@ class LoginWindow(QWidget):
         self._launch_dashboard(role, email)
 
     def _launch_dashboard(self, role: str, email: str):
-        from main import OpsManagerWindow, load_stylesheet
+        from main import load_stylesheet
 
-        initials, color = (
-            (ROLE_CONFIG[role][1], ROLE_CONFIG[role][2])
-            if role in ROLE_CONFIG
-            else ("?", "#64748b")
-        )
-
-        # Switch from login.qss to the main dashboard style.qss
         app = QApplication.instance()
         load_stylesheet(app)
 
-        self.dashboard = OpsManagerWindow(
-            role=role,
-            initials=initials,
-            avatar_color=color,
-            email=email,
-        )
+        initials = ROLE_CONFIG[role][1] if role in ROLE_CONFIG else "?"
+        color = ROLE_CONFIG[role][2] if role in ROLE_CONFIG else "#64748b"
+
+        if role == "Operations Manager":
+            from main import OpsManagerWindow
+
+            self.dashboard = OpsManagerWindow(
+                role=role, initials=initials, avatar_color=color, email=email
+            )
+
+        elif role == "Administrator / COO":
+            from coo_main import COOWindow
+
+            self.dashboard = COOWindow(
+                role=role, initials=initials, avatar_color=color, email=email
+            )
+
+        else:
+            # Placeholder — other roles will be added
+            from main import OpsManagerWindow
+
+            self.dashboard = OpsManagerWindow(
+                role=role, initials=initials, avatar_color=color, email=email
+            )
+
         self.dashboard.showMaximized()
         self.close()
 
